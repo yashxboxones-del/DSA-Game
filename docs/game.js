@@ -37,7 +37,9 @@ function loadLevel(n) {
 }
 function startGame() { score = 0; coins = 0; loadLevel(1); state = "playing"; }
 function pressed(...names) { return names.some(n => keys.has(n)); }
-function requestJump() { jumpRequested = true; }
+function requestJump() {
+  if (state === "playing") jumpRequested = true;
+}
 function processKey(k) {
     keys.add(k);
     if (k === " " || k === "space") requestJump();

@@ -14,13 +14,13 @@
     canvas { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9;
       background: #172346; border: 2px solid #6687c9; border-radius: 8px;
       image-rendering: pixelated; touch-action: none; }
-    .mobile-controls { display: grid; grid-template-columns: repeat(5, 1fr);
+    .mobile-controls { display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 8px; margin: 10px auto 0; max-width: 560px; touch-action: none; }
     button { min-height: 48px; border: 1px solid #7598df; border-radius: 10px;
       background: #263b70; color: #fff; font: bold 16px Arial;
       user-select: none; -webkit-user-select: none; touch-action: none; }
     button:active { background: #3e65ae; transform: translateY(1px); }
-    .menu-controls { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
+    .menu-controls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
       justify-content: center; margin: 10px auto 0; max-width: 560px; }
     @media (max-width: 700px), (pointer: coarse) {
       main { padding: 6px; }
@@ -34,19 +34,16 @@
     <h1>DSA Game - Browser Edition</h1>
     <canvas id="game" width="1280" height="720" aria-label="Playable DSA platformer"></canvas>
     <div class="mobile-controls" aria-label="Touch controls">
-      <button data-hold="a" aria-label="Move left">◀</button>
-      <button data-hold="d" aria-label="Move right">▶</button>
+      <button data-hold="a" aria-label="Move back">BACK</button>
+      <button data-hold="d" aria-label="Move forward">FRONT</button>
       <button data-action="jump" aria-label="Jump">JUMP</button>
-      <button data-key="r" aria-label="Restore checkpoint">RESPAWN</button>
-      <button data-key="p" aria-label="Pause">PAUSE</button>
     </div>
     <div class="menu-controls" aria-label="Menu controls">
       <button data-action="start">PLAY</button>
-      <button data-key="w">▲</button><button data-key="s">▼</button>
-      <button data-key="enter">SELECT</button><button data-key="escape">BACK</button>
+      <button data-key="w">UP</button><button data-key="s">DOWN</button>
     </div>
     <p>Keyboard: A/D or arrows to move, Space to jump, P/Esc to pause, R/U for checkpoint recovery.</p>
   </main>
-  <script src="game.js?v=3"></script>
+  <script src="game.js?v=4"></script>
 </body>
 </html>
