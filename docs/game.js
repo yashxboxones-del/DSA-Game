@@ -37,9 +37,10 @@ function loadLevel(n) {
 }
 function startGame() { score = 0; coins = 0; loadLevel(1); state = "playing"; }
 function pressed(...names) { return names.some(n => keys.has(n)); }
+function requestJump() { jumpRequested = true; }
 function processKey(k) {
     keys.add(k);
-    if (k === " " || k === "space") jumpRequested = true;
+    if (k === " " || k === "space") requestJump();
     if (state === "menu") {
       if (k === "arrowup" || k === "w") menuIndex = (menuIndex + 2) % 3;
       if (k === "arrowdown" || k === "s") menuIndex = (menuIndex + 1) % 3;
@@ -104,6 +105,21 @@ document.querySelectorAll("[data-key]").forEach(button => {
     setTimeout(() => keys.delete(key), 0);
   });
 });
+const jumpButton = document.querySelector("[data-action=jump]");
+jumpButton.addEventListener("pointerdown", event => {
+  event.preventDefault();
+  lastTouch = Date.now();
+  requestJump();
+});
+jumpButton.addEventListener("touchstart", event => {
+  event.preventDefault();
+  lastTouch = Date.now();
+  requestJump();
+}, {passive:false});
+jumpButton.addEventListener("click", event => {
+  event.preventDefault();
+  if (Date.now() - lastTouch >= 500) requestJump();
+});
 document.querySelector("[data-action=start]").addEventListener("click", event => {
   if (Date.now() - lastTouch >= 500) { event.preventDefault(); startGame(); }
 });
@@ -120,8 +136,11 @@ function update(dt) {
   if (state !== "playing") return;
   const left = pressed("a","arrowleft"), right = pressed("d","arrowright");
   player.vx = left !== right ? (left ? -300 : 300) : 0;
-  if (jumpRequested && player.ground) { player.vy = -520; player.ground = false; }
-  jumpRequested = false;
+  if (jumpRequested && player.ground) {
+    player.vy = -520;
+    player.ground = false;
+    jumpRequested = false;
+  }
   player.inv = Math.max(0, player.inv - dt); player.vy += 1200 * dt;
   const oldBottom = player.y + player.h;
   player.x = Math.max(0, Math.min(W-player.w, player.x + player.vx*dt));
