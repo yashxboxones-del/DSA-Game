@@ -49,6 +49,19 @@ console window, setup prompt, or start menu. No asset-copy step is required.
 For a desktop shortcut, set its target to the full path of
 `build\DSA-Game.exe` and its **Start in** directory to the repository root.
 
+### Download a ready-to-run Windows build
+
+Every push builds a downloadable Windows x64 package in GitHub Actions:
+
+1. Open the repository's **Actions** tab.
+2. Select **Build Windows game** and open the latest successful run.
+3. Download the `DSA-Game-Windows-x64` artifact.
+4. Extract `DSA-Game-Windows-x64.zip` and double-click `DSA-Game.exe`.
+
+The downloaded executable is the complete game and opens directly in the game
+window; it does not open a terminal or require CMake, Git, raylib, or a setup
+step. A GitHub repository clone contains source code, not the compiled `.exe`.
+
 ## Controls
 
 | Key | Action |

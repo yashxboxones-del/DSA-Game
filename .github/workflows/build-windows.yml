@@ -1,0 +1,36 @@
+name: Build Windows game
+
+on:
+  push:
+    branches:
+      - master
+      - '**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Configure
+        run: cmake -S . -B build -G "Visual Studio 17 2022" -A x64
+
+      - name: Build
+        run: cmake --build build --config Release --parallel
+
+      - name: Package executable
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path package | Out-Null
+          Copy-Item build/Release/DSA-Game.exe package/DSA-Game.exe
+          Compress-Archive -Path package/DSA-Game.exe -DestinationPath DSA-Game-Windows-x64.zip
+
+      - name: Upload Windows game
+        uses: actions/upload-artifact@v4
+        with:
+          name: DSA-Game-Windows-x64
+          path: DSA-Game-Windows-x64.zip
+          if-no-files-found: error
