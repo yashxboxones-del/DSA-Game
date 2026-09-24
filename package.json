@@ -1,0 +1,59 @@
+{
+  "name": "mumbai-rush",
+  "version": "1.0.0",
+  "description": "Mumbai Rush standalone desktop game",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "build:win": "npm run build:installer && npm run build:portable",
+    "build": "npm run build:installer && npm run build:portable",
+    "build:installer": "electron-builder --win nsis --publish never",
+    "build:portable": "electron-builder --win portable --publish never"
+  },
+  "dependencies": {
+    "three": "0.160.0"
+  },
+  "devDependencies": {
+    "electron": "^37.2.6",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.mumbairush.game",
+    "productName": "Mumbai Rush",
+    "publish": [],
+    "files": [
+      "index.html",
+      "main.js",
+      "preload.js",
+      "node_modules/three/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "artifactName": "Mumbai Rush Setup.${ext}",
+      "oneClick": true,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": false
+    },
+    "portable": {
+      "artifactName": "Mumbai Rush.${ext}"
+    }
+  }
+}

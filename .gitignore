@@ -3,6 +3,8 @@ game.exe
 *.o
 *.obj
 *.dll
+node_modules/
+dist/
 
 # IDE and editor files
 .vscode/
