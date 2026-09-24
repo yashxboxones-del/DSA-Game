@@ -1,10 +1,10 @@
-# 2D Platformer Game — College Data Structures Project
+# DSA GAME — College Data Structures Project
 
 A 2D side-scrolling platformer built in **C++ with SFML 3**, showcasing the real-time application of three fundamental linear data structures: **Linked List**, **Queue**, and **Stack**.
 
 ## Play in Your Browser
 
-The project also includes a browser edition built with HTML5 Canvas. Play it here:
+The project also includes a browser edition built with HTML5 Canvas. Play **DSA GAME** here:
 
 **https://yashxboxones-del.github.io/DSA-Game/**
 
