@@ -3,7 +3,7 @@ const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 const W = canvas.width, H = canvas.height;
 const keys = new Set();
-let state = "menu", menuIndex = 0, levelNo = 1, score = 0, coins = 0;
+let state = "menu", menuIndex = 0, levelNo = 1, score = 0, coins = 0, jumpRequested = false;
 let player, level, checkpoints = [], checkpointStack = [], last = performance.now(), lastTouch = 0;
 
 const levels = {
@@ -39,6 +39,7 @@ function startGame() { score = 0; coins = 0; loadLevel(1); state = "playing"; }
 function pressed(...names) { return names.some(n => keys.has(n)); }
 function processKey(k) {
     keys.add(k);
+    if (k === " " || k === "space") jumpRequested = true;
     if (state === "menu") {
       if (k === "arrowup" || k === "w") menuIndex = (menuIndex + 2) % 3;
       if (k === "arrowdown" || k === "s") menuIndex = (menuIndex + 1) % 3;
@@ -119,7 +120,8 @@ function update(dt) {
   if (state !== "playing") return;
   const left = pressed("a","arrowleft"), right = pressed("d","arrowright");
   player.vx = left !== right ? (left ? -300 : 300) : 0;
-  if (pressed(" ","space") && player.ground) { player.vy = -520; player.ground = false; }
+  if (jumpRequested && player.ground) { player.vy = -520; player.ground = false; }
+  jumpRequested = false;
   player.inv = Math.max(0, player.inv - dt); player.vy += 1200 * dt;
   const oldBottom = player.y + player.h;
   player.x = Math.max(0, Math.min(W-player.w, player.x + player.vx*dt));
