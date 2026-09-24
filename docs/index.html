@@ -25,6 +25,13 @@
     @media (max-width: 700px), (pointer: coarse) {
       main { padding: 6px; }
       p { display: none; }
+      .mobile-controls, .menu-controls { position: fixed; left: 8px; right: 8px;
+        bottom: max(8px, env(safe-area-inset-bottom)); z-index: 10;
+        max-width: none; background: rgba(10, 18, 42, .92); padding: 8px;
+        border-radius: 14px; }
+      .menu-controls { bottom: 78px; }
+      .mobile-controls button, .menu-controls button { min-height: 56px;
+        font-size: 18px; }
     }
     p { margin: 8px 0 0; color: #b8c9ed; font-size: .9rem; }
   </style>
@@ -44,6 +51,6 @@
     </div>
     <p>Keyboard: A/D or arrows to move, Space to jump, P/Esc to pause, R/U for checkpoint recovery.</p>
   </main>
-  <script src="game.js?v=4"></script>
+  <script src="game.js?v=5"></script>
 </body>
 </html>
