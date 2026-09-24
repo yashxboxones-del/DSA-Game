@@ -38,6 +38,7 @@ if (MSVC)
     target_compile_options(dsa_game PRIVATE /W4)
 else()
     target_compile_options(dsa_game PRIVATE -Wall -Wextra -Wpedantic)
+    target_link_options(dsa_game PRIVATE -static -static-libgcc -static-libstdc++)
 endif()
 
 if (WIN32)
