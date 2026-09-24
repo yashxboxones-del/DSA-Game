@@ -4,7 +4,7 @@ const ctx = canvas.getContext("2d");
 const W = canvas.width, H = canvas.height;
 const keys = new Set();
 let state = "menu", menuIndex = 0, levelNo = 1, score = 0, coins = 0;
-let player, level, checkpoints = [], checkpointStack = [], last = performance.now();
+let player, level, checkpoints = [], checkpointStack = [], last = performance.now(), lastTouch = 0;
 
 const levels = {
   1: {
@@ -70,6 +70,7 @@ document.querySelectorAll("[data-hold]").forEach(button => {
   const release = event => { event.preventDefault(); keys.delete(key); };
   const press = event => {
     event.preventDefault(); keys.add(key);
+    if (event.type === "touchstart") lastTouch = Date.now();
     if (event.pointerId !== undefined) button.setPointerCapture(event.pointerId);
   };
   button.addEventListener("pointerdown", press);
@@ -79,19 +80,34 @@ document.querySelectorAll("[data-hold]").forEach(button => {
   button.addEventListener("pointerleave", release);
   button.addEventListener("touchend", release, {passive:false});
   button.addEventListener("touchcancel", release, {passive:false});
+  button.addEventListener("click", event => {
+    event.preventDefault();
+    if (Date.now() - lastTouch < 500) return;
+    keys.add(key);
+    setTimeout(() => keys.delete(key), 120);
+  });
 });
 document.querySelectorAll("[data-key]").forEach(button => {
   const key = button.dataset.key;
   const press = event => {
     event.preventDefault(); processKey(key);
+    if (event.type === "touchstart") lastTouch = Date.now();
     setTimeout(() => keys.delete(key), 0);
   };
   button.addEventListener("pointerdown", press);
   button.addEventListener("touchstart", press, {passive:false});
+  button.addEventListener("click", event => {
+    event.preventDefault();
+    if (Date.now() - lastTouch < 500) return;
+    processKey(key);
+    setTimeout(() => keys.delete(key), 0);
+  });
 });
-document.querySelector("[data-action=start]").addEventListener("click", () => startGame());
+document.querySelector("[data-action=start]").addEventListener("click", event => {
+  if (Date.now() - lastTouch >= 500) { event.preventDefault(); startGame(); }
+});
 document.querySelector("[data-action=start]").addEventListener("touchstart", event => {
-  event.preventDefault(); startGame();
+  event.preventDefault(); lastTouch = Date.now(); startGame();
 }, {passive:false});
 
 function restoreCheckpoint() {
