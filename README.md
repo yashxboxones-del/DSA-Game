@@ -2,6 +2,14 @@
 
 A 2D side-scrolling platformer built in **C++ with SFML 3**, showcasing the real-time application of three fundamental linear data structures: **Linked List**, **Queue**, and **Stack**.
 
+## Play in Your Browser
+
+The project also includes a browser edition built with HTML5 Canvas. Once GitHub Pages finishes deploying, play it here:
+
+**https://yashxboxones-del.github.io/DSA-Game/**
+
+The browser edition preserves the two levels, platform physics, coins, enemies, checkpoints, menus, pause screen, and victory flow. The original C++/SFML desktop build remains available for local development.
+
 ---
 
 ## Environment

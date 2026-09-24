@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DSA Game - Browser Edition</title>
+  <style>
+    :root { color-scheme: dark; font-family: Arial, sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center;
+      background: #10172b; color: #fff; }
+    main { width: min(1280px, 100vw); padding: 12px; text-align: center; }
+    h1 { margin: 0 0 8px; font-size: clamp(1.1rem, 3vw, 1.8rem); }
+    canvas { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9;
+      background: #172346; border: 2px solid #6687c9; border-radius: 8px;
+      image-rendering: pixelated; }
+    p { margin: 8px 0 0; color: #b8c9ed; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>DSA Game - Browser Edition</h1>
+    <canvas id="game" width="1280" height="720" aria-label="Playable DSA platformer"></canvas>
+    <p>Keyboard: A/D or arrows to move, Space to jump, P/Esc to pause, R/U for checkpoint recovery.</p>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
