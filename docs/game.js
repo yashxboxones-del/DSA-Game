@@ -37,10 +37,7 @@ function loadLevel(n) {
 }
 function startGame() { score = 0; coins = 0; loadLevel(1); state = "playing"; }
 function pressed(...names) { return names.some(n => keys.has(n)); }
-function handleKey(e) {
-  const k = e.key.toLowerCase();
-  if (["arrowup","arrowdown","arrowleft","arrowright"," ","escape"].includes(k)) e.preventDefault();
-  if (e.type === "keydown") {
+function processKey(k) {
     keys.add(k);
     if (state === "menu") {
       if (k === "arrowup" || k === "w") menuIndex = (menuIndex + 2) % 3;
@@ -59,9 +56,31 @@ function handleKey(e) {
       if (k === "enter") { if (state === "win") startGame(); else { state = "playing"; restoreCheckpoint(); } }
       if (k === "m") state = "menu";
     }
-  } else keys.delete(k);
+}
+function handleKey(e) {
+  const k = e.key.toLowerCase();
+  if (["arrowup","arrowdown","arrowleft","arrowright"," ","escape"].includes(k)) e.preventDefault();
+  if (e.type === "keydown") processKey(k); else keys.delete(k);
 }
 addEventListener("keydown", handleKey); addEventListener("keyup", handleKey);
+
+document.querySelectorAll("[data-hold]").forEach(button => {
+  const key = button.dataset.hold;
+  const release = event => { event.preventDefault(); keys.delete(key); };
+  button.addEventListener("pointerdown", event => {
+    event.preventDefault(); keys.add(key); button.setPointerCapture(event.pointerId);
+  });
+  button.addEventListener("pointerup", release);
+  button.addEventListener("pointercancel", release);
+  button.addEventListener("pointerleave", release);
+});
+document.querySelectorAll("[data-key]").forEach(button => {
+  const key = button.dataset.key;
+  button.addEventListener("pointerdown", event => {
+    event.preventDefault(); processKey(key);
+    setTimeout(() => keys.delete(key), 0);
+  });
+});
 
 function restoreCheckpoint() {
   const cp = checkpointStack[checkpointStack.length - 1];
