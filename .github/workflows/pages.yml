@@ -1,4 +1,4 @@
-name: Deploy browser game
+name: Deploy DSA GAME browser edition
 
 on:
   push:

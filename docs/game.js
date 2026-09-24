@@ -40,14 +40,18 @@ function pressed(...names) { return names.some(n => keys.has(n)); }
 function requestJump() {
   if (state === "playing") jumpRequested = true;
 }
+function selectMenuItem() {
+  if (state !== "menu") return;
+  if (menuIndex === 0) startGame();
+  else if (menuIndex === 1) state = "controls";
+}
 function processKey(k) {
     keys.add(k);
     if (k === " " || k === "space") requestJump();
     if (state === "menu") {
       if (k === "arrowup" || k === "w") menuIndex = (menuIndex + 2) % 3;
       if (k === "arrowdown" || k === "s") menuIndex = (menuIndex + 1) % 3;
-      if (k === "enter") menuIndex === 0 ? startGame() : menuIndex === 1 ? state = "controls" : (state = "menu");
-      if (k === "escape" && state === "controls") state = "menu";
+      if (k === "enter") selectMenuItem();
     } else if (state === "controls" && (k === "escape" || k === "enter")) state = "menu";
     else if (state === "playing") {
       if (k === "p" || k === "escape") state = "paused";
@@ -122,11 +126,11 @@ jumpButton.addEventListener("click", event => {
   event.preventDefault();
   if (Date.now() - lastTouch >= 500) requestJump();
 });
-document.querySelector("[data-action=start]").addEventListener("click", event => {
-  if (Date.now() - lastTouch >= 500) { event.preventDefault(); startGame(); }
+document.querySelector("[data-action=select]").addEventListener("click", event => {
+  if (Date.now() - lastTouch >= 500) { event.preventDefault(); selectMenuItem(); }
 });
-document.querySelector("[data-action=start]").addEventListener("touchstart", event => {
-  event.preventDefault(); lastTouch = Date.now(); startGame();
+document.querySelector("[data-action=select]").addEventListener("touchstart", event => {
+  event.preventDefault(); lastTouch = Date.now(); selectMenuItem();
 }, {passive:false});
 
 function restoreCheckpoint() {

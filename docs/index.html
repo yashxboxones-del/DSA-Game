@@ -3,7 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DSA Game - Browser Edition</title>
+  <meta name="application-name" content="DSA GAME">
+  <meta name="description" content="DSA GAME browser edition, a data-structures platformer.">
+  <title>DSA GAME - Browser Edition</title>
   <style>
     :root { color-scheme: dark; font-family: Arial, sans-serif; }
     * { box-sizing: border-box; }
@@ -38,7 +40,7 @@
 </head>
 <body>
   <main>
-    <h1>DSA Game - Browser Edition</h1>
+    <h1>DSA GAME - Browser Edition</h1>
     <canvas id="game" width="1280" height="720" aria-label="Playable DSA platformer"></canvas>
     <div class="mobile-controls" aria-label="Touch controls">
       <button data-hold="a" aria-label="Move back">BACK</button>
@@ -46,11 +48,11 @@
       <button data-action="jump" aria-label="Jump">JUMP</button>
     </div>
     <div class="menu-controls" aria-label="Menu controls">
-      <button data-action="start">PLAY</button>
+      <button data-action="select" aria-label="Select menu item">SELECT</button>
       <button data-key="w">UP</button><button data-key="s">DOWN</button>
     </div>
-    <p>Keyboard: A/D or arrows to move, Space to jump, P/Esc to pause, R/U for checkpoint recovery.</p>
+    <p>Keyboard: A/D or arrows to move, Space to jump, P/Esc to pause, R/U for checkpoint recovery. On touch screens, use SELECT with the menu arrows.</p>
   </main>
-  <script src="game.js?v=5"></script>
+  <script src="game.js?v=6"></script>
 </body>
 </html>
