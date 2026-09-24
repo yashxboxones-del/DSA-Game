@@ -130,13 +130,12 @@ int main() {
     SetRandomSeed((unsigned int)time(nullptr));
 
     enum GameState {
-        MENU,
         PLAYING,
         PAUSED,
         GAME_OVER
     };
 
-    GameState gameState = MENU;
+    GameState gameState = PLAYING;
 
     // --------------------------------------------------------
     // ROAD
@@ -226,6 +225,8 @@ int main() {
         nextCarID = 1;
     };
 
+    resetGame();
+
     // --------------------------------------------------------
     // MAIN GAME LOOP
     // --------------------------------------------------------
@@ -257,14 +258,6 @@ int main() {
                 gameState = PAUSED;
             else if (gameState == PAUSED)
                 gameState = PLAYING;
-        }
-
-        // Start
-        if (gameState == MENU &&
-            IsKeyPressed(KEY_ENTER)) {
-
-            resetGame();
-            gameState = PLAYING;
         }
 
         // Restart
@@ -911,77 +904,6 @@ int main() {
             20,
             WHITE
         );
-
-        // ====================================================
-        // MENU
-        // ====================================================
-
-        if (gameState == MENU) {
-
-            DrawRectangle(
-                0,
-                0,
-                SCREEN_W,
-                SCREEN_H,
-                Fade(BLACK, 0.48f)
-            );
-
-            const char *title =
-                "STREET RUSH";
-
-            const char *subtitle =
-                "QUEUE-BASED HIGHWAY RACING";
-
-            const char *start =
-                "PRESS ENTER TO START";
-
-            DrawText(
-                title,
-                SCREEN_W / 2 -
-                    MeasureText(title, 58) / 2,
-                190,
-                58,
-                WHITE
-            );
-
-            DrawText(
-                subtitle,
-                SCREEN_W / 2 -
-                    MeasureText(subtitle, 24) / 2,
-                260,
-                24,
-                GOLD
-            );
-
-            DrawText(
-                "DSA CONCEPT: QUEUE (FIFO)",
-                SCREEN_W / 2 -
-                    MeasureText(
-                        "DSA CONCEPT: QUEUE (FIFO)",
-                        23
-                    ) / 2,
-                310,
-                23,
-                SKYBLUE
-            );
-
-            DrawText(
-                start,
-                SCREEN_W / 2 -
-                    MeasureText(start, 25) / 2,
-                375,
-                25,
-                WHITE
-            );
-
-            DrawText(
-                "A/D or ARROWS = STEER    SPACE = NITRO    P = PAUSE",
-                SCREEN_W / 2 - 285,
-                425,
-                18,
-                LIGHTGRAY
-            );
-        }
 
         // ====================================================
         // PAUSE

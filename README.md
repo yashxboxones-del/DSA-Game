@@ -36,7 +36,7 @@ connection. The executable is written to:
 build/DSA-Game.exe
 ```
 
-## Run
+## Direct launch
 
 From PowerShell:
 
@@ -44,14 +44,15 @@ From PowerShell:
 .\build\DSA-Game.exe
 ```
 
-Or configure a debugger/IDE to launch `build/DSA-Game.exe` from the repository
-root. No asset-copy step is required.
+This opens only the game window and starts directly in gameplay. There is no
+console window, setup prompt, or start menu. No asset-copy step is required.
+For a desktop shortcut, set its target to the full path of
+`build\DSA-Game.exe` and its **Start in** directory to the repository root.
 
 ## Controls
 
 | Key | Action |
 | --- | --- |
-| `Enter` | Start the game from the menu |
 | `A` / `Left Arrow` | Steer left |
 | `D` / `Right Arrow` | Steer right |
 | `Space` | Use nitro |
