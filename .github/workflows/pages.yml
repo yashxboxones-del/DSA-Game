@@ -2,7 +2,7 @@ name: Deploy DSA GAME browser edition
 
 on:
   push:
-    branches: [master]
+    branches: [master, yashxboxones-del-package-mumbai-rush]
   workflow_dispatch:
 
 permissions:
@@ -12,6 +12,7 @@ permissions:
 
 jobs:
   deploy:
+    if: github.ref == 'refs/heads/master'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -22,5 +23,20 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: docs
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+  deploy-mumbai-rush:
+    if: github.ref == 'refs/heads/yashxboxones-del-package-mumbai-rush'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
       - id: deployment
         uses: actions/deploy-pages@v4
