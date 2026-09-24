@@ -13,7 +13,7 @@
     h1 { margin: 0 0 8px; font-size: clamp(1.1rem, 3vw, 1.8rem); }
     canvas { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9;
       background: #172346; border: 2px solid #6687c9; border-radius: 8px;
-      image-rendering: pixelated; }
+      image-rendering: pixelated; touch-action: none; }
     .mobile-controls { display: none; grid-template-columns: repeat(5, 1fr);
       gap: 8px; margin: 10px auto 0; max-width: 560px; touch-action: none; }
     button { min-height: 48px; border: 1px solid #7598df; border-radius: 10px;
@@ -41,6 +41,7 @@
       <button data-key="p" aria-label="Pause">PAUSE</button>
     </div>
     <div class="menu-controls" aria-label="Menu controls">
+      <button data-action="start">PLAY</button>
       <button data-key="w">▲</button><button data-key="s">▼</button>
       <button data-key="enter">SELECT</button><button data-key="escape">BACK</button>
     </div>

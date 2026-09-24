@@ -63,24 +63,36 @@ function handleKey(e) {
   if (e.type === "keydown") processKey(k); else keys.delete(k);
 }
 addEventListener("keydown", handleKey); addEventListener("keyup", handleKey);
+canvas.addEventListener("touchstart", event => event.preventDefault(), {passive:false});
 
 document.querySelectorAll("[data-hold]").forEach(button => {
   const key = button.dataset.hold;
   const release = event => { event.preventDefault(); keys.delete(key); };
-  button.addEventListener("pointerdown", event => {
-    event.preventDefault(); keys.add(key); button.setPointerCapture(event.pointerId);
-  });
+  const press = event => {
+    event.preventDefault(); keys.add(key);
+    if (event.pointerId !== undefined) button.setPointerCapture(event.pointerId);
+  };
+  button.addEventListener("pointerdown", press);
+  button.addEventListener("touchstart", press, {passive:false});
   button.addEventListener("pointerup", release);
   button.addEventListener("pointercancel", release);
   button.addEventListener("pointerleave", release);
+  button.addEventListener("touchend", release, {passive:false});
+  button.addEventListener("touchcancel", release, {passive:false});
 });
 document.querySelectorAll("[data-key]").forEach(button => {
   const key = button.dataset.key;
-  button.addEventListener("pointerdown", event => {
+  const press = event => {
     event.preventDefault(); processKey(key);
     setTimeout(() => keys.delete(key), 0);
-  });
+  };
+  button.addEventListener("pointerdown", press);
+  button.addEventListener("touchstart", press, {passive:false});
 });
+document.querySelector("[data-action=start]").addEventListener("click", () => startGame());
+document.querySelector("[data-action=start]").addEventListener("touchstart", event => {
+  event.preventDefault(); startGame();
+}, {passive:false});
 
 function restoreCheckpoint() {
   const cp = checkpointStack[checkpointStack.length - 1];
