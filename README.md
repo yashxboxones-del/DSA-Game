@@ -4,11 +4,19 @@ A 2D side-scrolling platformer built in **C++ with SFML 3**, showcasing the real
 
 ## Play in Your Browser
 
-The project also includes a browser edition built with HTML5 Canvas. Once GitHub Pages finishes deploying, play it here:
+The project also includes a browser edition built with HTML5 Canvas. Play it here:
 
 **https://yashxboxones-del.github.io/DSA-Game/**
 
 The browser edition preserves the two levels, platform physics, coins, enemies, checkpoints, menus, pause screen, and victory flow. The original C++/SFML desktop build remains available for local development.
+
+To test the browser edition locally without any build dependencies:
+
+```powershell
+python -m http.server 8000 --directory docs
+```
+
+Then open `http://localhost:8000`. Every push to `master` publishes the `docs/` directory through `.github/workflows/pages.yml`.
 
 ---
 
