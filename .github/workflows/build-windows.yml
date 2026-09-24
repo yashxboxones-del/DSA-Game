@@ -1,0 +1,48 @@
+name: Build Windows game
+
+on:
+  push:
+    branches:
+      - master
+      - '**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Install MinGW UCRT64 toolchain
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
+          install: >-
+            mingw-w64-ucrt-x86_64-cmake
+            mingw-w64-ucrt-x86_64-gcc
+            mingw-w64-ucrt-x86_64-make
+
+      - name: Configure
+        shell: msys2 {0}
+        run: cmake -S . -B build -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        shell: msys2 {0}
+        run: cmake --build build --config Release --parallel
+
+      - name: Package executable
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path package | Out-Null
+          Copy-Item build/DSA-Game.exe package/DSA-Game.exe
+          Compress-Archive -Path package/DSA-Game.exe -DestinationPath DSA-Game-Windows-x64.zip
+
+      - name: Upload Windows game
+        uses: actions/upload-artifact@v4
+        with:
+          name: DSA-Game-Windows-x64
+          path: DSA-Game-Windows-x64.zip
+          if-no-files-found: error
