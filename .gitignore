@@ -1,0 +1,15 @@
+# Build outputs
+game.exe
+*.o
+*.obj
+*.dll
+
+# IDE and editor files
+.vscode/
+.idea/
+*.user
+*.suo
+
+# Python cache files
+__pycache__/
+*.py[cod]
