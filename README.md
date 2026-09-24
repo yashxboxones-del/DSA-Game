@@ -1,14 +1,26 @@
-# 2D Platformer Game — College Data Structures Project
+# Om — College Data Structures Game
 
-A 2D side-scrolling platformer built in **C++ with SFML 3**, showcasing the real-time application of three fundamental linear data structures: **Linked List**, **Queue**, and **Stack**.
+**Om** is a 2D side-scrolling platformer built in **C++ with SFML 3**, showcasing the real-time application of three fundamental linear data structures: **Linked List**, **Queue**, and **Stack**.
 
-## Play in Your Browser
+## Play Om
 
-The project also includes a browser edition built with HTML5 Canvas. Once GitHub Pages finishes deploying, play it here:
+### Windows desktop version
+
+The repository includes the packaged Windows executable **`Om.exe`**. To play Om on Windows:
+
+1. Download `Om.exe` from the [latest GitHub release](https://github.com/yashxboxones-del/DSA-Game/releases/latest).
+2. Open the downloaded file in Windows Explorer.
+3. If Windows SmartScreen appears, review the publisher warning and choose **More info → Run anyway** only if you trust the download.
+
+The executable is a Windows desktop game and must be downloaded before it can be played; it is not browser-playable.
+
+### Browser edition
+
+The project also includes a separate HTML5 Canvas edition. Once GitHub Pages finishes deploying, play it here:
 
 **https://yashxboxones-del.github.io/DSA-Game/**
 
-The browser edition preserves the two levels, platform physics, coins, enemies, checkpoints, menus, pause screen, and victory flow. The original C++/SFML desktop build remains available for local development.
+The browser edition preserves the two levels, platform physics, coins, enemies, checkpoints, menus, pause screen, and victory flow.
 
 ---
 
@@ -56,13 +68,15 @@ PlatformerGame/
 │   ├── sounds/
 │   └── music/
 │
+├── Om.exe             <- Packaged Windows desktop game
+├── docs/              <- Browser edition
 ├── Makefile
 └── README.md
 ```
 
 ---
 
-## How to Build & Run
+## Build the Windows desktop version from source
 
 Open PowerShell in the `PlatformerGame/` directory:
 
