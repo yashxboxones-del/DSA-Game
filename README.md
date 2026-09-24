@@ -1,14 +1,14 @@
-# Om — College Data Structures Game
+# DSA GAME — College Data Structures Game
 
-**Om** is a 2D side-scrolling platformer built in **C++ with SFML 3**, showcasing the real-time application of three fundamental linear data structures: **Linked List**, **Queue**, and **Stack**.
+**DSA GAME** is a 2D side-scrolling platformer built in **C++ with SFML 3**, showcasing the real-time application of three fundamental linear data structures: **Linked List**, **Queue**, and **Stack**.
 
-## Play Om
+## Play DSA GAME
 
 ### Windows desktop version
 
-The repository includes the packaged Windows executable **`Om.exe`**. To play Om on Windows:
+The repository includes the packaged Windows executable **`DSA-GAME.exe`**. To play DSA GAME on Windows:
 
-1. Download `Om.exe` from the [latest GitHub release](https://github.com/yashxboxones-del/DSA-Game/releases/latest).
+1. Download `DSA-GAME.exe` from the [latest GitHub release](https://github.com/yashxboxones-del/DSA-Game/releases/latest).
 2. Open the downloaded file in Windows Explorer.
 3. If Windows SmartScreen appears, review the publisher warning and choose **More info → Run anyway** only if you trust the download.
 
@@ -68,7 +68,7 @@ PlatformerGame/
 │   ├── sounds/
 │   └── music/
 │
-├── Om.exe             <- Packaged Windows desktop game
+├── DSA-GAME.exe       <- Packaged Windows desktop game
 ├── docs/              <- Browser edition
 ├── Makefile
 └── README.md
